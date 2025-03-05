@@ -1,4 +1,15 @@
-<p-table [value]="employees">
+<p-table [value]="employees" [scrollable]="true" 
+        [scrollHeight]="'76vh'" 
+        [paginator]="true" 
+        [rows]="10"
+        [lazy]="true"
+        (onLazyLoad)="loadEmployees($event)"
+        [totalRecords]="20">
+    <ng-template pTemplate="caption">
+        <div>
+            <h2>Employees</h2>
+        </div>
+    </ng-template>
     <ng-template #header>
         <tr>
             <th>First Name</th>

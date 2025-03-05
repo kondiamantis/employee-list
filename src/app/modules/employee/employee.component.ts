@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { EmployeeService } from '../../services/employee/employee.service';
 import { Employee } from '../../interfaces/employee';
-import { TableModule } from 'primeng/table';
+import { TableLazyLoadEvent, TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-employee',
@@ -11,18 +11,22 @@ import { TableModule } from 'primeng/table';
 })
 export class EmployeeComponent {
 
+
   employees: Employee[] = [];
 
   constructor(private employeeService: EmployeeService) {}
 
-  ngOnInit() {
-    this.getEmployeeList();
-  }
 
   getEmployeeList(){
     this.employeeService.getEmployees().subscribe(
       data => this.employees = data
     )
+  }
+
+  loadEmployees($event: TableLazyLoadEvent) {
+    console.log($event);
+    this.getEmployeeList();
+   
   }
 
 }
